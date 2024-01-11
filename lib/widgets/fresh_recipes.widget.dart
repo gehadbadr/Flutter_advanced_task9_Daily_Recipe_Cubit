@@ -18,9 +18,13 @@ class FreshRecipes extends StatelessWidget {
     required this.serving,
     this.recommended,
   });
+  int? ratingInt;
 
   @override
   Widget build(BuildContext context) {
+    ratingInt = rating!.toInt();
+  //  double.tryParse(rating!.toString());
+
     return Container(
         child: !recommended!
             ? freshRecipes(context)
@@ -33,7 +37,7 @@ class FreshRecipes extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.bottomLeft,
-          margin: EdgeInsets.only(top:10,right: 30,bottom: 10,left: 10),
+          margin: EdgeInsets.only(top: 10, right: 30, bottom: 10, left: 10),
           width: 200,
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(

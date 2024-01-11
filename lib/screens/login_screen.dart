@@ -34,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
     double height = context.screenHeight;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: ColorsApp.bgColor,
       body: BlocConsumer<AuthCubit, AuthState>(
         builder: (context, state) {

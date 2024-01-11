@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daily_recipe2/models/ad.models.dart';
+import 'package:daily_recipe2/repository/carsoul.repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 part 'carsoul_state.dart';
 
 class CarsoulCubit extends Cubit<CarsoulState> {
+  late CarsoulRepository carsoulRepository;
   int sliderIndex = 0;
   List<Ad> adsLists = [];
   CarouselController carouselControllerEx = CarouselController();
@@ -16,8 +18,16 @@ class CarsoulCubit extends Cubit<CarsoulState> {
   bool showPrev = false;
   CarsoulCubit() : super(CarsoulInitial());
 
-
-
+  // void getAds() async {
+  //   carsoulRepository.getAds().then((adsLists){
+  //   emit(CarsoulLoading());
+  //    Future.delayed(Duration(seconds: 1), () {
+  //     this.adsLists = adsLists;
+  //     emit(CarsoulLoaded(this.adsLists));
+  //   });
+  //   });
+  // }
+  
   void getAds() async {
     var adsData = await rootBundle.loadString('assets/data/sample.json');
     var dataDecoded =
@@ -27,7 +37,6 @@ class CarsoulCubit extends Cubit<CarsoulState> {
     await Future.delayed(Duration(seconds: 1), () {
       emit(CarsoulLoaded(adsLists));
     });
-
   }
 
   onSliderChanged(index, _) async {
@@ -57,6 +66,5 @@ class CarsoulCubit extends Cubit<CarsoulState> {
   dotsIndicator(position) async {
     await carouselControllerEx.animateToPage(position);
     sliderIndex = position;
-
   }
 }

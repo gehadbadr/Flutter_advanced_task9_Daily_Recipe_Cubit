@@ -86,7 +86,6 @@ class AuthCubit extends Cubit<AuthState> {
       'login': loginValue,
     };
     return info;
-    //notifyListeners();
   }
 
   //  Future<List<UserModel>> getUser1() async {

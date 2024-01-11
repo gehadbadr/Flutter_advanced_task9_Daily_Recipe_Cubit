@@ -39,7 +39,6 @@ class _MyWidgetState extends State<SignupScreen> {
     BlocProvider.of<AuthCubit>(context).changeisLoading(false);
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: ColorsApp.bgColor,
       body: BlocConsumer<AuthCubit, AuthState>(
         builder: (context, state) {

@@ -5,15 +5,12 @@ import 'package:flutter/services.dart';
 
 class CarsoulRepository {
 
-
   Future <List<Ad>> getAds() async {
     var adsData = await rootBundle.loadString('assets/data/sample.json');
     var dataDecoded =
         List<Map<String, dynamic>>.from(jsonDecode(adsData)['ads']);
     //  print(dataDecoded);
   return   dataDecoded.map((e) => Ad.fromJson(e)).toList();
-  
-
     // print(CarsoulState(adsLists:state.adsLists));
   }
 
