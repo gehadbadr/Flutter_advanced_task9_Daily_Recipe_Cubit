@@ -1,5 +1,6 @@
 import 'package:daily_recipe2/consts/consts.dart';
 import 'package:daily_recipe2/cubit/auth_cubit.dart';
+import 'package:daily_recipe2/reuseable_function/snackbar.function.dart';
 import 'package:daily_recipe2/widgets/applogo.dart';
 import 'package:daily_recipe2/widgets/custom_button.dart';
 import 'package:daily_recipe2/widgets/custom_textfield.dart';
@@ -24,27 +25,26 @@ class _LoginScreenState extends State<LoginScreen> {
     _globalKey = GlobalKey<FormState>();
     passwordController = TextEditingController();
     emailController = TextEditingController();
-
+    init();
     super.initState();
+  }
+
+  void init() {
+    BlocProvider.of<AuthCubit>(context).changeisLoading(false);
   }
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<AuthCubit>(context).changeisLoading(false);
     double height = context.screenHeight;
 
     return Scaffold(
-      backgroundColor: ColorsApp.bgColor,
+    //  backgroundColor: ColorsApp.bgColor,
       body: BlocConsumer<AuthCubit, AuthState>(
         builder: (context, state) {
           if (state is ChangeisLoading) {
             return BlurryModalProgressHUD(
               inAsyncCall: BlocProvider.of<AuthCubit>(context).isLoading,
               blurEffectIntensity: 4,
-              // progressIndicator: SpinKitFadingCircle(
-              //   color: purpleColor,
-              //   size: 90.0,
-              // ),
               dismissible: true,
               opacity: 0.4,
               color: Colors.black87,
@@ -148,12 +148,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       authController
                                                           .changeisLoading(
                                                               false);
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(SnackBar(
-                                                              content: Text(TextApp
-                                                                  .errorNullloggedIn)));
-                                                    }
+                                                      ShowSnackbar.showSnackbar(
+                                                      context,
+                                                      TextApp.errorNullloggedIn);
+                                                
+                                                    }else
                                                     if (emailValue !=
                                                             emailController
                                                                 .text ||
@@ -163,11 +162,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       authController
                                                           .changeisLoading(
                                                               false);
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(SnackBar(
-                                                              content: Text(TextApp
-                                                                  .errorloggedIn)));
+                                                              ShowSnackbar.showSnackbar(
+                                                      context,
+                                                      TextApp.errorloggedIn);
+                                                
                                                       authController
                                                           .changeisLoading(
                                                               false);
@@ -185,7 +183,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                                           .pushReplacementNamed(
                                                               context,
                                                               'HomepageScreen/');
-                                                    
                                                     }
                                                   } catch (e) {
                                                     print(e.toString());

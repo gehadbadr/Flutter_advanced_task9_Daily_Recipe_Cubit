@@ -18,14 +18,17 @@ class HomepageScreen extends StatefulWidget {
 
 class _HomepageScreenState extends State<HomepageScreen> {
   void initState() {
+    init();
     super.initState();
+  }
+
+  void init() {
+    BlocProvider.of<CarsoulCubit>(context).getAds();
+    BlocProvider.of<RecipeCubit>(context).getRecipes();
   }
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<CarsoulCubit>(context).getAds();
-    BlocProvider.of<RecipeCubit>(context).getRecipes();
-
     return Scaffold(
       backgroundColor: ColorsApp.whiteColor,
       appBar: PreferredSize(
@@ -45,12 +48,15 @@ class _HomepageScreenState extends State<HomepageScreen> {
               children: [
                 BlocConsumer<AuthCubit, AuthState>(
                   builder: (context, state) {
-                    String? name = BlocProvider.of<AuthCubit>(context).prefsFile.getString('name');
+                    String? name = BlocProvider.of<AuthCubit>(context)
+                        .prefsFile
+                        .getString('name');
 
-                        return Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text('${TextApp.bonjour}, ${name}',
-                          style: TextStyle(fontSize: 20, color: ColorsApp.fontGrey)));
+                    return Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('${TextApp.bonjour}, ${name}',
+                            style: TextStyle(
+                                fontSize: 20, color: ColorsApp.fontGrey)));
                   },
                   listener: (context, state) {
                     if (state is CarsoulError) {
@@ -226,32 +232,32 @@ class _HomepageScreenState extends State<HomepageScreen> {
                           state.recommendedList.isEmpty
                               ? CircularProgressIndicator()
                               : SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: 
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: List.generate(
-                                    state.recommendedList.length,
-                                    (index) => FreshRecipes(
-                                        id: state.recommendedList[index].id,
-                                        title:
-                                            state.recommendedList[index].title!,
-                                        image:
-                                            state.recommendedList[index].image,
-                                        meal_type: state
-                                            .recommendedList[index].meal_type,
-                                        rating:
-                                            state.recommendedList[index].rating,
-                                        calerios: state
-                                            .recommendedList[index].calerios,
-                                        serving: state
-                                            .recommendedList[index].serving,
-                                        prep_time: state
-                                            .recommendedList[index].prep_time,
-                                        recommended: true),
+                                  scrollDirection: Axis.horizontal,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: List.generate(
+                                      state.recommendedList.length,
+                                      (index) => FreshRecipes(
+                                          id: state.recommendedList[index].id,
+                                          title: state
+                                              .recommendedList[index].title!,
+                                          image: state
+                                              .recommendedList[index].image,
+                                          meal_type: state
+                                              .recommendedList[index].meal_type,
+                                          rating: state
+                                              .recommendedList[index].rating,
+                                          calerios: state
+                                              .recommendedList[index].calerios,
+                                          serving: state
+                                              .recommendedList[index].serving,
+                                          prep_time: state
+                                              .recommendedList[index].prep_time,
+                                          recommended: true),
+                                    ),
                                   ),
                                 ),
-                          ),
                         ],
                       );
                     } else {

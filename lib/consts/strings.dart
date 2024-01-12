@@ -23,12 +23,13 @@ abstract class TextApp {
   static const registeredSuccessfully = 'you register successfully ';
   static const errorRepassword = 'Confirm password is not correct';
   static const errorAgree = 'You have to agree';
-  static const invalidEmail = 'Please enter a valid email';
+  static const invalidEmail = 'Please enter a valid email.';
   static const weakPassword = 'Please Enter more than 6 digit .';
-  static const loggedIn = 'you Logged is successfully ';
-  static const errorNullloggedIn = 'No Email is registered';
-  static const errorloggedIn = 'Wrong Email or Password ';
-  static const loggedOut = 'Logged out successfully ';
+  static const loggedIn = 'you Logged is successfully. ';
+  static const errorNullloggedIn = 'No Email is registered.';
+  static const errorRegisteredBefore = 'This email is registered before.';
+  static const errorloggedIn = 'Wrong Email or Password .';
+  static const loggedOut = 'Logged out successfully .';
 
 //Home page screen
   static const searchAnyThing = "Search for recipe...";

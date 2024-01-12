@@ -1,4 +1,5 @@
-import 'package:daily_recipe/consts/consts.dart';
+import 'package:daily_recipe2/consts/consts.dart';
+import 'package:daily_recipe2/consts/consts.dart';
 import 'package:flutter/material.dart';
 
 abstract class ShowSnackbar {

@@ -18,15 +18,6 @@ class CarsoulCubit extends Cubit<CarsoulState> {
   bool showPrev = false;
   CarsoulCubit() : super(CarsoulInitial());
 
-  // void getAds() async {
-  //   carsoulRepository.getAds().then((adsLists){
-  //   emit(CarsoulLoading());
-  //    Future.delayed(Duration(seconds: 1), () {
-  //     this.adsLists = adsLists;
-  //     emit(CarsoulLoaded(this.adsLists));
-  //   });
-  //   });
-  // }
   
   void getAds() async {
     var adsData = await rootBundle.loadString('assets/data/sample.json');

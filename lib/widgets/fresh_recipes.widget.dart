@@ -142,7 +142,7 @@ class FreshRecipes extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   VxRating(
-                      value: rating!,
+                      value: rating!.toDouble(),
                       onRatingUpdate: (value) {},
                       normalColor: ColorsApp.textfieldGrey,
                       selectionColor: ColorsApp.PKColor,
@@ -160,7 +160,7 @@ class FreshRecipes extends StatelessWidget {
               )
             : Row(children: [
                 VxRating(
-                    value: rating!,
+                    value: rating!.toDouble(),
                     onRatingUpdate: (value) {},
                     normalColor: ColorsApp.textfieldGrey,
                     selectionColor: ColorsApp.PKColor,

@@ -1,5 +1,6 @@
 import 'package:daily_recipe2/consts/consts.dart';
 import 'package:daily_recipe2/cubit/auth_cubit.dart';
+import 'package:daily_recipe2/reuseable_function/snackbar.function.dart';
 import 'package:daily_recipe2/widgets/applogo.dart';
 import 'package:daily_recipe2/widgets/custom_button.dart';
 import 'package:daily_recipe2/widgets/custom_textfield.dart';
@@ -29,14 +30,17 @@ class _MyWidgetState extends State<SignupScreen> {
     passwordController = TextEditingController();
     repasswordController = TextEditingController();
     emailController = TextEditingController();
-
+    init();
     super.initState();
+  }
+
+  void init() {
+    BlocProvider.of<AuthCubit>(context).changeisLoading(false);
   }
 
   @override
   Widget build(BuildContext context) {
     double height = context.screenHeight;
-    BlocProvider.of<AuthCubit>(context).changeisLoading(false);
 
     return Scaffold(
       backgroundColor: ColorsApp.bgColor,
@@ -149,7 +153,12 @@ class _MyWidgetState extends State<SignupScreen> {
                                                         context);
                                                 authController
                                                     .changeisLoading(true);
-                                                if (passwordController.text ==
+                                                  String? emailValue =
+                                                        authController.prefsFile
+                                                            .getString('email');
+                                              if (emailController.text !=
+                                                    emailValue) {
+                                                      if (passwordController.text ==
                                                     repasswordController.text) {
                                                   if (_globalKey.currentState!
                                                       .validate()) {
@@ -193,10 +202,17 @@ class _MyWidgetState extends State<SignupScreen> {
                                                 } else {
                                                   authController
                                                       .changeisLoading(false);
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
-                                                          content: Text(TextApp
-                                                              .errorRepassword)));
+                                                  ShowSnackbar.showSnackbar(
+                                                      context,
+                                                      TextApp.errorRepassword);
+                                                
+                                                }
+                                                } else {
+                                                  authController
+                                                      .changeisLoading(false);
+                                                  ShowSnackbar.showSnackbar(
+                                                      context,
+                                                      TextApp.errorRegisteredBefore);
                                                 }
                                               },
                                             )),
